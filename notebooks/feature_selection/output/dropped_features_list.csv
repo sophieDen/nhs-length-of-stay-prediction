@@ -1,0 +1,18 @@
+Dropped_Feature,Reason
+attendancetype,High correlation with other features
+ae_unplanned_attendance,High correlation with other features
+inj_or_ail,High correlation with other features
+specialty_spec_code_Surgical_Spec,High correlation with other features
+presenting_complaint_count,High correlation with other features
+location,High correlation with other features
+source_of_ref_description,High correlation with other features
+comorbidity_acute_myocardial_infarction_flag.1,High correlation with other features
+spell_primary_diagnosis_encoded,High correlation with other features
+NEWS2_missing,High correlation with other features
+spell_dominant_proc_encoded,High correlation with other features
+ward_code_admission_3,High correlation with other features
+place_of_incident,High correlation with other features
+arrival_mode_description,High correlation with other features
+presenting_complaint_encoded,High correlation with other features
+non_elective_admission_flag,High correlation with other features
+season_of_the_admission,High correlation with other features
