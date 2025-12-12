@@ -8,7 +8,6 @@ Structure:
   - processed - our columns after data cleaning
   - raw
   - data.csv - merged cleaned columns
-  - data_reduced.csv - data after feature selection
 - notebooks
   - EDA
   - feature_selection
