@@ -1,7 +1,9 @@
 # nhs-length-of-stay-prediction
+
 Group Project 10 – Predicting a Patient’s Length of Stay (WWL NHS)
 
 Structure:
+
 - data
   - processed - our columns after data cleaning
   - raw
@@ -17,12 +19,12 @@ Structure:
 
 Feature selection:
 
-1 Features were categorized by type to apply appropriate analysis methods: 
-Continuous Numerical - Spearman/Pearson correlation 
-                       Reason: Spearman method is Non-parametric (Does not assume linear relationships or normal distributions)
-                               Robust to outliers: Uses rank-based calculations
-                               Appropriate for ordinal data: Works well with scores and categorical ordinals
-                               
+1 Features were categorized by type to apply appropriate analysis methods:
+Continuous Numerical - Spearman/Pearson correlation
+Reason: Spearman method is Non-parametric (Does not assume linear relationships or normal distributions)
+Robust to outliers: Uses rank-based calculations
+Appropriate for ordinal data: Works well with scores and categorical ordinals
+
 Binary Numerical - Pearson correlation
 
 2 Feature Selection Algorithms:
@@ -48,9 +50,10 @@ Balances multicollinearity reduction with predictive performance
 
 Decision Logic:
 For correlated feature pair (A, B):
-  - If corr(A, target) > corr(B, target): Keep A, drop B
-  - Else: Keep B, drop A
-  - If equal: Keep feature with higher variance
+
+- If corr(A, target) > corr(B, target): Keep A, drop B
+- Else: Keep B, drop A
+- If equal: Keep feature with higher variance
 
 3 Feature Grouping
 Features were organized into logical clinical groups for interpretable analysis.
@@ -74,36 +77,28 @@ Range: [0, 1] with higher being better
 
 A) Random Forest Regressor
 Configuration
-n_estimators=200        # Fewer trees, faster training
-max_depth=8             # Shallower trees, less complexity
-min_samples_split=30    # Requires more samples to split
-min_samples_leaf=15     # Larger leaf nodes
-max_features=0.5        # Even more feature randomness
-max_samples=0.7         # Less data per tree
+n_estimators=200 # Fewer trees, faster training
+max_depth=8 # Shallower trees, less complexity
+min_samples_split=30 # Requires more samples to split
+min_samples_leaf=15 # Larger leaf nodes
+max_features=0.5 # Even more feature randomness
+max_samples=0.7 # Less data per tree
 
 B) XGBoost
 Configuration
-n_estimators=200        # Fewer rounds
-learning_rate=0.03      # Even slower learning
-max_depth=4             # Shallower trees
-min_child_weight=5      # Stronger constraint
-subsample=0.7           # More subsampling
-colsample_bytree=0.7    # Less features per tree
-gamma=1.0               # Higher split threshold
-reg_alpha=0.1           # More L1 regularization
-reg_lambda=2.0          # More L2 regularization
-
-C) CatBoost
-Configuration
-iterations=200          # Fewer iterations
-learning_rate=0.03      # Slower learning
-depth=4                 # Shallower trees
-l2_leaf_reg=5           # More regularization
-random_strength=2       # More randomness in splits
-bagging_temperature=1   # Same bootstrap settings
+n_estimators=200 # Fewer rounds
+learning_rate=0.03 # Even slower learning
+max_depth=4 # Shallower trees
+min_child_weight=5 # Stronger constraint
+subsample=0.7 # More subsampling
+colsample_bytree=0.7 # Less features per tree
+gamma=1.0 # Higher split threshold
+reg_alpha=0.1 # More L1 regularization
+reg_lambda=2.0 # More L2 regularization
 
 2 Cross-Validation Strategy
 Method: 5-Fold Cross-Validation with KFold
+
 1. Shuffle training data
 2. Split into 5 equal folds
 3. For each fold:
@@ -120,6 +115,7 @@ CV R² (mean ± std)
 3 Overfitting Detection & Prevention
 
 Detection Methods:
+
 1. Train-Test Gap Analysis
 
 MAE Gap = Test MAE - Train MAE
@@ -136,11 +132,10 @@ R² Gap 0.10-0.15: Acceptable
 R² Gap > 0.15: Overfitting
 
 2. CV-Test Gap Analysis
-CV-Test Gap = Test MAE - CV MAE
-Reasoning:
-If test performance is much worse than CV, model doesn't generalize
-Small gaps indicate consistent performance across different data splits
-
+   CV-Test Gap = Test MAE - CV MAE
+   Reasoning:
+   If test performance is much worse than CV, model doesn't generalize
+   Small gaps indicate consistent performance across different data splits
 
 Ensemble Strategy:
 
@@ -158,5 +153,3 @@ Rationale:
 Simple average gives equal weight to all models
 More sophisticated weighting could be explored (e.g., weighted by CV performance)
 Ensemble often outperforms individual models in practice
-
-
